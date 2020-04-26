@@ -1,0 +1,15 @@
+# Report
+
+## Requirement
+
+- Add seek bar from Dec 08'19 to current date to display infected cases up to the selected date on the seek bar: 5 points.
+- Add Play/Pause button to auto move the seek bar value forward and display corresponding values on map and list: 3 points.
+- Upload your project to public host: 2 points.
+
+## Completed
+
+Score: 10 pts
+
+- Add seek bar from Dec 08'19 to current date to display infected cases up to the selected date on the seek bar: 5 points.
+- Add Play/Pause button to auto move the seek bar value forward and display corresponding values on map and list: 3 points.
+- Upload your project to public host: 2 points.
