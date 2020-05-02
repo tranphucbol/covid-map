@@ -3,23 +3,22 @@ import PatientInfo from "./PatientInfo";
 import CovidMap from "./CovidMap";
 import PatientList from "./PatientList";
 import SeekBar from "./SeekBar";
+import moment from "moment"
 
 const CovidDashboard = (props) => {
-    const startDate = "08-12-2019";
-    const [date, setDate] = useState(startDate);
+    const now = moment();
+    const [date, setDate] = useState(now.format("DD-MM-YYYY"));
     const [currentPatient, setCurrentPatient] = useState();
     const [patients, setPatients] = useState([]);
-
+    
     useEffect(() => {
-        fetch("https://cors-anywhere.herokuapp.com/https://maps.vnpost.vn/apps/covid19/api/patientapi/list", {
-            headers: {
-                'Origin': 'localhost'
-            }
-        })
+        fetch("https://maps.vnpost.vn/apps/covid19/api/patientapi/list")
             .then((res) => res.json())
             .then(
                 (result) => {
-                    setPatients(result.data);
+                    const ordered = result.data.sort((a, b) => b.verifyDate.localeCompare(a.verifyDate));
+                    setPatients(ordered);
+                    setCurrentPatient(ordered[0])
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -40,14 +39,10 @@ const CovidDashboard = (props) => {
     }
 
     return (
-        <div className="container mx-auto">
+        <div className="container">
             <div className="w-full">
-                <h2 className="font-mono text-center text-3xl my-3 text-gray-700">
-                    COVID MAP
-                </h2>
-
-                <div className="grid grid-cols-12 gap-4">
-                    <div className="col-span-9">
+                <div className="grid grid-cols-6 lg:grid-cols-12 gap-4">
+                    <div className="col-span-6 lg:col-span-9">
                         <CovidMap
                             date={date}
                             currentPatient={currentPatient}
@@ -55,17 +50,19 @@ const CovidDashboard = (props) => {
                             onPatientMarkerClicked={patientMarkerClickedHandler}
                         />
                     </div>
-                    <div className="col-span-3" style={{ height: 600 }}>
-                        <div className="grid grid-rows-2 grid-flow-col gap-4">
-                            <PatientList
-                                date={date}
-                                height={292}
-                                patients={patients}
-                                onPatientMarkerClicked={
-                                    patientMarkerClickedHandler
-                                }
-                            />
-                            <div>
+                    <div className="col-span-6 lg:col-span-3">
+                        <div className="grid grid-cols-2 lg:grid-cols-2 gap-4">
+                            <div className="lg:col-span-2">
+                                <PatientList
+                                    date={date}
+                                    height={292}
+                                    patients={patients}
+                                    onPatientMarkerClicked={
+                                        patientMarkerClickedHandler
+                                    }
+                                />
+                            </div>
+                            <div className="lg:col-span-2">
                                 <PatientInfo
                                     height={292}
                                     patient={currentPatient}

@@ -19,10 +19,10 @@ const PatientList = ({ height, patients, onPatientMarkerClicked, date }) => {
         .sort((a, b) => b.verifyDate.localeCompare(a.verifyDate));
     return (
         <div
-            className="flex flex-column shadow rounded-md font-mono"
+            className="flex flex-col shadow-lg rounded-md font-mono"
             style={{ height: height }}
         >
-            <h2 className="px-3 py-3 border-t border-gray-300 font-semibold shadow rounded-t-md text-gray-700">
+            <h2 className="px-3 py-3 border-t border-gray-300 font-semibold shadow-lg rounded-t-md text-gray-700">
                 Patient List {date}
             </h2>
             <ul

@@ -21,7 +21,7 @@ const CovidMap = ({date, patients, currentPatient, onPatientMarkerClicked}) => {
         .sort((a, b) => b.verifyDate.localeCompare(a.verifyDate));
     return (
         <Map
-            className="rounded-md border-gray-600 shadow"
+            className="rounded-md border-gray-600 shadow-lg"
             animate={true}
             center={center}
             zoom={4}

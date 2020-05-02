@@ -11,11 +11,9 @@ const SeekBar = ({ startDate, onRangeSliderChanged }) => {
     const now = moment();
     const diffInDays = now.diff(then, "days");
 
-    const [data, setData] = useState({value: 0, label: then.format(format)});
+    const [data, setData] = useState({value: diffInDays, label: now.format(format)});
     const [play, setPlay] = useState(false);
     const [intervalId, setIntervalId] = useState();
-    // var interval;
-
 
     const handleChangedRangeInput = (e) => {
 
@@ -34,7 +32,11 @@ const SeekBar = ({ startDate, onRangeSliderChanged }) => {
             const interval = setInterval(() => {
                 setData((data) => {
                     const newValue = data.value + 1;
-                    if(newValue >= diffInDays - 1) clearInterval(interval)
+                    if(newValue >= diffInDays) {
+                        clearInterval(interval)
+                        setPlay(false);
+                        return {...data};
+                    }
                     const newLabel = moment(startDate, format)
                         .add(newValue, "days")
                         .format(format);
@@ -55,7 +57,7 @@ const SeekBar = ({ startDate, onRangeSliderChanged }) => {
     );
 
     return (
-        <div className="shadow rounded-md p-3">
+        <div className="shadow-lg rounded-md p-3">
             <h2 className="text-blue-700 font-mono mb-2 text-lg">
                 Date: {data.label}
             </h2>
@@ -64,10 +66,10 @@ const SeekBar = ({ startDate, onRangeSliderChanged }) => {
                 <input
                     type="range"
                     min="0"
-                    max={diffInDays - 1}
+                    max={diffInDays}
                     value={data.value}
                     onChange={handleChangedRangeInput}
-                    className="slider"
+                    className="slider transition duration-500"
                 />
             </div>
         </div>

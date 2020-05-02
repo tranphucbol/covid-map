@@ -4,7 +4,7 @@ import "./css/tailwind.css"
 import "./css/index.css";
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-// require('./mocks');
+require('./mocks');
 
 ReactDOM.render(
   <React.StrictMode>
