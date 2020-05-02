@@ -17,3 +17,7 @@
 - Use git to track and mange your mid-term working, capture your commit history as proof: 1 points
 
 ## Git History
+
+<div align="center">
+    <img src="media/git-history.png" />
+</div>
